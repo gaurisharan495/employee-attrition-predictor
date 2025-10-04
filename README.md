@@ -24,4 +24,9 @@ It leverages data-driven insights to support employee retention strategies and r
 •⁠  ⁠*Features:* Age, Job Role, Monthly Income, Years at Company, Overtime, etc.  
 •⁠  ⁠*Target Variable:* ⁠ Attrition ⁠ (Yes / No)
 
+## How to Run
+1.⁠ ⁠Clone the repository.
+2.⁠ ⁠Install required Python libraries (⁠ pip install -r requirements.txt ⁠).
+3.⁠ ⁠Open the Jupyter Notebook (⁠ employee_attrition_model.ipynb ⁠) to explore the code and results.
+
 	⁠Note: No confidential company data is shared in this repository.
