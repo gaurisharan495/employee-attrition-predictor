@@ -1,32 +1,55 @@
 # Employee Attrition Predictor
 
-A machine learning model that predicts employee attrition (whether an employee is likely to leave the company) based on key HR and performance factors.  
-Developed during my internship at OnActuate Consulting.
+A machine learning pipeline to predict employee attrition on the 
+IBM HR Analytics dataset (1,470 employees, 35 features), comparing 
+Logistic Regression, Random Forest, and XGBoost classifiers.
 
-## Project Overview
-The project helps HR teams proactively identify employees at risk of leaving the organization.  
-It leverages data-driven insights to support employee retention strategies and resource planning.
+Built during internship at OnActuate Consulting.
 
-## Features
-•⁠  ⁠Predicts employee attrition probability using machine learning  
-•⁠  ⁠Data preprocessing and feature engineering for HR datasets  
-•⁠  ⁠Model evaluation with accuracy, precision, recall, and F1-score  
-•⁠  ⁠Interactive visualization of important features  
-•⁠  ⁠Exportable prediction results and model insights  
+---
 
-## Tech Stack
-•⁠  ⁠*Programming Language:* Python  
-•⁠  ⁠*Libraries & Tools:* Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, CatBoost  
-•⁠  ⁠*Notebook Environment:* Jupyter Notebook / Google Colab  
+## Results
+
+| Model | Accuracy | Precision | Recall | F1 | ROC-AUC |
+|---|---|---|---|---|---|
+| Logistic Regression | 73.8% | 34.0% | 68.1% | 45.4% | 79.96% |
+| Random Forest | 84.4% | 51.5% | 36.2% | 42.5% | 78.97% |
+| XGBoost | 86.1% | 62.5% | 31.9% | 42.3% | 77.79% |
+
+5-fold Cross-Validated ROC-AUC (Random Forest): **0.8199**
+
+Logistic Regression recommended for deployment — highest Recall (68%)
+minimises missed attrition cases, which matters more than raw accuracy
+in an HR retention context.
+
+---
+
+## Pipeline
+
+- Drops Employee_ID; target encoded as 0/1
+- Numeric features: median imputation
+- Categorical features: most-frequent imputation + OneHotEncoding
+- Stratified 80/20 train-test split
+- Class imbalance handled via class_weight='balanced' and
+  scale_pos_weight for XGBoost
+- Evaluation: Accuracy, Precision, Recall, F1, ROC-AUC
+- 5-fold cross-validation on Random Forest
+
+---
 
 ## Dataset
-•⁠  ⁠*Source:* HR Analytics Dataset (synthetic / anonymized)  
-•⁠  ⁠*Features:* Age, Job Role, Monthly Income, Years at Company, Overtime, etc.  
-•⁠  ⁠*Target Variable:* ⁠ Attrition ⁠ (Yes / No)
+
+IBM HR Analytics Employee Attrition dataset (public, via Kaggle).
+1,470 records, 35 features including Age, Job Role, Monthly Income,
+Overtime, Years at Company, Work-Life Balance.
+Target: Attrition (Yes / No).
+
+---
 
 ## How to Run
-1.⁠ ⁠Clone the repository.
-2.⁠ ⁠Install required Python libraries (⁠ pip install -r requirements.txt ⁠).
-3.⁠ ⁠Open the Jupyter Notebook (⁠ employee_attrition_model.ipynb ⁠) to explore the code and results.
 
-	⁠Note: No confidential company data is shared in this repository.
+```bash
+pip install -r requirements.txt
+# Place IBM HR dataset as dataset.csv in the same folder
+jupyter notebook employee_attrition_predictor.ipynb
+```
