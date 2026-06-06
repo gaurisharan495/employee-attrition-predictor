@@ -1,7 +1,5 @@
 pandas
 numpy
-scikit-learn
 matplotlib
-seaborn
-catboost
-jupyter
+scikit-learn
+xgboost
